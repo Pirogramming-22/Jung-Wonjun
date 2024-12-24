@@ -202,6 +202,21 @@
                     margin-right: 12px;
                     height: 100%;
                     padding-left: 10px;
+                    position: relative;
+                }
+                #search-svg::after {
+                    display: none;
+                }
+                #search > form:focus-within #search-svg::after {
+                    position: absolute;
+                    right: 0;
+                    top: 20px;
+                    content: '';
+                    width: 1px;
+                    height: 20px;
+                    background-color: #e4e4e4;
+                    display: inline-block;
+                    
                 }
                 #search-svg svg {
                     width: 24px;
@@ -213,7 +228,7 @@
                     padding: 17px 0;
                     font-size: 2rem;
                     line-height: 24px;
-                    font-weight: 24px;
+                    font-weight: bold;
                     border: none;
                     outline: none;
                 }
@@ -221,10 +236,7 @@
                     color: white;
                 }
                 #search-input:focus::placeholder {
-                    color: rgb(230, 230, 230);
-                }
-                #search-right {
-                    color: 230;
+                    color: #e4e4e4;
                 }
                 #search-right {
                     flex: 1;
