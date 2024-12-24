@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="leftHeader">
+            <div class="menu"><img id="logo" src="logo.png" alt="logoPng"></div>
+            <div class="menu">Why GitHub?</div>
+            <div class="menu">Team</div>
+            <div class="menu">Enterprise</div>
+            <div class="menu">Explore</div>
+            <div class="menu">Marketplace</div>
+            <div class="menu">Pricing</div>
+        </div>
+        <div class="rightHeader">
+            <input id="find" type="text" placeholder="Search GitHub">
+            <button id="signIn" type="button" onClick="location.href='https://github.com/login'">Sign in</button>
+            <button id="signUp" type="button" onClick="location.href='https://github.com/signup'">Sign up</button>
+        </div>
+    </header>
+    <nav>
+        <div class="leftNav">
+            <div>
+                <h1 id="topic">Built for <br> developers</h1>
+            </div>
+            <div>
+                <p id="contents">Github is a development platform inspired by the <br> way you work. From <span id="white">open source</span> to <span id="white">business</span>, you <br> can host and review code, manage projects, and <br> build software alongside 50 millions developer.</p>
+            </div>
+        </div>
+        <div class="rightNav">
+            <label for="username">Username</label>
+            <input type="text" required>
+            <label for="email">Email</label>
+            <input type="email" required>
+            <label for="password">Password</label>
+            <input type="password" required>
+            <p id="discription">Make sure it's at least 15 characters OR at least 8 characters including a <br> number and a lowercase letter. <span id="blue">Learn more.</span></p>
+            <button id="realSign" type="button" onClick="location.href='https://github.com/signup'">Sign up for Github</button>
+            <p id="tip">By clicking "Sign up for GitHub",you agree to our <span id="blue">Terms of Service</span> and <br> <span id="blue">Privacy Statement.</span> We'll occasionally send you account related emails.</p>
+        </div>
+    </nav>
+    <footer>
+        <div id="bottom">
+            <img id="bottomImg" src="footer.png" alt="footerPng">
+        </div>
+    </footer>
+</body>
+</html>
