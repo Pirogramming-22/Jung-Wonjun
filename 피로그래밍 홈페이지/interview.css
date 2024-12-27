@@ -1,0 +1,29 @@
+html, body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    background-color: black;
+    color: white;
+}
+.top {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0;
+    padding-right: 0;
+    gap: 100px;
+}
+.piro {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+.menu {
+    display: flex;
+    list-style-type: none;
+    gap: 30px;
+}
+.member {
+    border: 1px solid white;
+    border-radius: 4px;
+}
