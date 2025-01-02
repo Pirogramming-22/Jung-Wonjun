@@ -1,41 +1,36 @@
 num = 0
 count = 0
+turn = "computer"
+
+def brGame(turn, num):
+    while True: # 입력 이벤트
+        inputVal = input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능) : ")
+        if not inputVal.isdigit():
+            print("정수를 입력하세요")
+            continue
+        elif int(inputVal) > 3 or int(inputVal) < 1:
+            print("1,2,3 중 하나를 입력하세요")
+            continue
+        else:
+            count = int(inputVal)
+            break
+
+    for _ in range(count):  # 숫자 말하기 이벤트
+        num+=1
+        print(f"{turn} {num}")
+        if num == 31:
+            break
+    return(num)
 
 while True:
-    while True:
-        inputVal = input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능) : ")
-        if not inputVal.isdigit():
-            print("정수를 입력하세요")
-            continue
-        elif int(inputVal) > 3 or int(inputVal) < 1:
-            print("1,2,3 중 하나를 입력하세요")
-            continue
-        else:
-            count = int(inputVal)
-            break
+    num = brGame(turn, num)
 
-    for _ in range(count):
-        num+=1
-        print(f"playerA : {num}")
-        if num == 31:
-            print("playerB win!")
-            exit()
+    if turn == "computer":
+            turn = "player"
+    else:
+        turn = "computer"
+        
+    if num == 31:   # 게임이 종료된 경우
+        break
 
-    while True:
-        inputVal = input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능) : ")
-        if not inputVal.isdigit():
-            print("정수를 입력하세요")
-            continue
-        elif int(inputVal) > 3 or int(inputVal) < 1:
-            print("1,2,3 중 하나를 입력하세요")
-            continue
-        else:
-            count = int(inputVal)
-            break
-
-    for _ in range(count):
-        num+=1
-        print(f"playerB : {num}")
-        if num == 31:
-            print("playerA win!")
-            exit()
+print(f"{turn} win!")
