@@ -1,7 +1,7 @@
 num = 0
-count = 0;
+count = 0
 while True:
-    inputVal = input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능) :")
+    inputVal = input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능) : ")
     if not inputVal.isdigit():
         print("정수를 입력하세요")
         continue
@@ -11,3 +11,7 @@ while True:
     else:
         count = int(inputVal)
         break
+
+for _ in range(count):
+    num+=1
+    print(f"playerA : {num}")
