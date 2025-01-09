@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Movie reviews</title>
+</head>
+<body>
+    <div class="header">
+        <a href="{% url 'board:board_list' %}">
+            <h1>myMoviereviews</h1>
+        </a>
+        <a href="{% url 'board:board_create' %}">
+            <button class="add_button">Add a New review</button>
+        </a>
+    </div>
+    {% for board in boards %}
+    <div class="review">
+        <img src="" alt="image">
+        
+        <a href="{% url 'board:board_detail' board.pk %}">
+            <h3>{{board.title}}</h3>
+        </a>
+        <p>개봉년도 {{ board.year }}</p>
+        <p>장르 {{ board.genre }}</p>
+        <p>별점 {{ board.score }}</p>
+    </div>
+    {% empty %}
+    <p>등록된 리뷰가 없습니다!</p>
+    {% endfor %}
+</body>
+</html>

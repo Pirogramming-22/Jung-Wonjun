@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form_container">
+        <div class="header">
+            <a href="{% url 'board:board_list' %}">
+                <h1>myMoviereviews</h1>
+            </a>
+            <a href="{% url 'board:board_create' %}">
+                <button class="add_button">Add a New review</button>
+            </a>
+        </div>
+        <div class="form_title">Movie review🍿</div>
+        <form action="{% url 'board:board_create' %}" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="title">제목:</label>
+                <input type="text" id="title" name="title">
+            </div>
+            <div>
+                <label for="year">개봉년도:</label>
+                <input type="text" id="year" name="year">
+            </div>
+            <div>
+                <label for="genre">장르:</label>
+                <input type="text" id="genre" name="genre">
+            </div>
+            <div>
+                <label for="score">별점:</label>
+                <input type="text" id="score" name="score">
+            </div>
+            <div>
+                <label for="runtime">러닝타임:</label>
+                <input type="text" id="runtime" name="runtime">
+            </div>
+            <div>
+                <label for="review">리뷰</label>
+                <textarea id="review" name="review"  rows="6"></textarea>
+            </div>
+            <div>
+                <label for="director">감독:</label>
+                <input type="text" id="director" name="director">
+            </div>
+            <div>
+                <label for="actor">배우:</label>
+                <input type="text" id="actor" name="actor">
+            </div>
+            <button type="submit" class="submit_button">Save</button>
+        </form>
+    </div>
+</body>
+</html>
