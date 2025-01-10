@@ -13,8 +13,12 @@ def board_list(request):
 # 디테일 페이지
 def board_detail(request, pk):
     board = Board.objects.get(id=pk)
+    hour = board.runtime//60
+    minute = board.runtime%60
+    runtime_display = f"{hour}시간 {minute}분"
     context = {
         'board': board,
+        'runtime_display': runtime_display
     }
     return render(request, 'board/detail.html', context)
 
@@ -25,7 +29,7 @@ def board_create(request):
         board = Board.objects.create(
             title = request.POST['title'],
             year = request.POST['year'],
-            genre = request.POST['genre'],
+            genre = request.POST.get('genre', ''),
             score = request.POST['score'],
             runtime = request.POST['runtime'],
             review = request.POST['review'],
@@ -33,7 +37,11 @@ def board_create(request):
             actor = request.POST['actor'],
         )
         return redirect('board:board_list')
-    return render(request, 'board/create.html')
+    
+    context = {
+        'genres': Board.GENRE_CHOICES
+    }
+    return render(request, 'board/create.html', context)
 
 
 # 리뷰 수정 페이지
