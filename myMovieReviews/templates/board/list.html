@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Movie reviews</title>
+    <link rel="stylesheet" href="{% static 'css/list.css' %}">
+</head>
+<body>
+    <div class="header">
+        <a href="{% url 'board:board_list' %}">
+            <h1>my<span class="pink">Movie</span>reviews</h1>
+        </a>
+        <a href="{% url 'board:board_create' %}">
+            <button class="add_button">Add a New review</button>
+        </a>
+    </div>
+    <div class="review_container">
+        {% for board in boards %}
+        <div class="review">
+            <img src="{% static 'animal.jpg' %}" alt="image">
+            
+            <a href="{% url 'board:board_detail' board.pk %}">
+                <h3 class="title">{{board.title}}</h3>
+            </a>
+            <p><span class="category">개봉년도</span> {{ board.year }}년</p>
+            <p><span class="category">장르</span> {{ board.genre }}</p>
+            <p><span class="category">별점</span> {{ board.score }}</p>
+        </div>
+        {% empty %}
+        <p>등록된 리뷰가 없습니다!</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Movie reviews</title>
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+</head>
+<body>
+    <div class="header">
+        <a href="{% url 'board:board_list' %}">
+            <h1>my<span class="pink">Movie</span>reviews</h1>
+        </a>
+        <a href="{% url 'board:board_create' %}">
+            <button class="add_button">Add a New review</button>
+        </a>
+    </div>
+    <div class="container">
+        <div class="title_container">
+            <h1>{{ board.title }}</h1>
+            <div class="button_container">
+                <a href="{% url 'board:board_update' board.pk %}">
+                    <button class="modify_button">수정</button>
+                <a>
+                <form action="{% url 'board:board_delete' board.pk %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="delete_button">삭제</button>
+                </form>
+            </div>
+        </div>
+        <div class="review_info">
+            <img src="{% static 'animal.jpg' %}" alt="image">
+            <div>
+                <p><span class="category">개봉년도</span> {{ board.year }}년</p>
+                <p><span class="category">감독</span> {{ board.director }}</p>
+                <p><span class="category">주연</span> {{ board.actor }}</p>
+                <p><span class="category">장르</span> {{ board.genre }}</p>
+                <p><span class="category">별점</span> {{ board.score }}</p>
+                <p><span class="category">러닝타임</span> {{ runtime_display }}</p>
+            </div>
+        </div>
+        <div class="review_comment">
+            <p>{{ board.review }}</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+* {
+    text-decoration: none;
+    color: black;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 40px;
+    border-bottom: 1px solid gray;
+}
+
+.container {
+    padding-inline: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.review_info {
+    background-color: gainsboro;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.review_info img {
+    width: 200px;
+    height: 250px;
+}
+
+.pink {
+    color: plum;
+}
+
+.title_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.button_container {
+    margin-left: auto;
+    display: flex;
+}
+
+.modify_button, .delete_button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.add_button {
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    font-weight: 600;
+}
+
+.review_comment {
+    margin-top: 20px;
+    background-color: gainsboro;
+    padding: 20px;
+}
+
+.category {
+    color: palevioletred;
+    font-weight: 600;
+}

@@ -1,0 +1,49 @@
+* {
+    text-decoration: none;
+    color: black;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 40px;
+    border-bottom: 1px solid gray;
+}
+
+.add_button {
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    font-weight: 600;
+}
+
+.review_container {
+    margin: 50px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: center;
+    grid-gap: 30px;
+    align-items: center;
+}
+
+.review {
+    background-color: gainsboro;
+    height: 300px;
+    max-width: 180px;
+    padding: 30px;
+}
+
+.pink {
+    color: plum;
+}
+
+.category {
+    color: palevioletred;
+    font-weight: 600;
+}
+
+.review img {
+    width: 140px;
+    height: 120px;
+}
