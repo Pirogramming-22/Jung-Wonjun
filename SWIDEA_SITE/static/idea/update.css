@@ -1,0 +1,65 @@
+.update_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    padding-bottom: 100px;
+}
+
+.form_title {
+    font-size: 25px;
+    margin-bottom: 0;
+}
+
+form {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 300px;
+    max-width: 80%;
+    margin-top: 40px;
+    position: relative;
+}
+
+form p {
+    margin-left: 0;
+    max-width: 100%;
+    gap: 5px;
+}
+
+p {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin: 0 auto;
+}
+
+p input, p select {
+    border-radius: 4px;
+}
+
+p textarea {
+    border-radius: 4px;
+}
+
+.submit_button {
+    background: none;
+    width: 100px;
+    padding-block: 4px;
+    border-radius: 20px;
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    max-width: 100%;
+    position: absolute;
+    top: 580px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.submit_button:hover {
+    background-color: rgb(76, 76, 76);
+}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% block head %}
+    <link rel="stylesheet" href="{% static 'idea/list.css' %}">
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+        {% for idea in ideas %}
+        <div class="item">
+            {% if idea.image != null and idea.image.url != "" %}
+                <img src="{{ idea.image.url }}" alt="image">
+            {% else %}
+                <img src="{% static 'no_img.png' %}" alt="이미지 존재X">
+            {% endif %}
+            <a href="{% url 'idea:detail' idea.pk %}" class="title">{{ idea.title }}</a>
+            <p>예상 개발 툴 : {{ idea.devtool }}</p>
+            <p>아이디어 관심도 : 
+                <span><button class="plus_button">+</button></span>
+                {{ idea.interest }}
+                <span><button class="minus_button">-</button></span>
+            </p>
+        </div>
+        {% endfor %}
+    {% endblock %}
+</body>
+</html>
