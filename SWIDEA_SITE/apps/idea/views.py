@@ -1,12 +1,24 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from apps.idea.models import Idea
 from apps.idea.forms import Ideaform
 
 # Create your views here.
 def list(request):
-    ideas = Idea.objects.all()
+    sort_by = request.GET.get('sort_by', 'created_at')
+    if sort_by == 'interest':
+        ideas = Idea.objects.all().order_by('-interest')  # 찜하기순
+    elif sort_by == 'title':
+        ideas = Idea.objects.all().order_by('title')  # 이름순
+    elif sort_by == 'latest':
+        ideas = Idea.objects.all().order_by('-created_at')  # 최신순
+    else:
+        ideas = Idea.objects.all().order_by('created_at')  # 등록순
+    paginator = Paginator(ideas, 4)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
     context = {
-        'ideas': ideas,
+        'page_obj':page_obj
     }
     return render(request, 'idea/list.html', context)
 

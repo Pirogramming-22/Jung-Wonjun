@@ -8,3 +8,4 @@ class Idea(models.Model):
     content = models.TextField('아이디어 설명:')
     interest = models.IntegerField('아이디어 관심도:', max_length=20)
     devtool = models.ForeignKey(Tool, verbose_name='예상 개발툴:', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="등록일")

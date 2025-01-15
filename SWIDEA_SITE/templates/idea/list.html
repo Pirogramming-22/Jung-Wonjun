@@ -7,27 +7,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     {% block head %}
-    <link rel="stylesheet" href="{% static 'idea/list.css' %}">
+        <link rel="stylesheet" href="{% static 'idea/list.css' %}">
     {% endblock %}
 </head>
 <body>
     {% block content %}
-        {% for idea in ideas %}
-        <div class="item">
-            {% if idea.image != null and idea.image.url != "" %}
-                <img src="{{ idea.image.url }}" alt="image">
-            {% else %}
-                <img src="{% static 'no_img.png' %}" alt="이미지 존재X">
-            {% endif %}
-            <a href="{% url 'idea:detail' idea.pk %}" class="title">{{ idea.title }}</a>
-            <p>예상 개발 툴 : {{ idea.devtool }}</p>
-            <p>아이디어 관심도 : 
-                <span><button class="plus_button">+</button></span>
-                {{ idea.interest }}
-                <span><button class="minus_button">-</button></span>
-            </p>
+    <div class="list_container">
+        <h3 class="form_title yellow">Idea List</h3>
+        <p class="discription">나의 아이디어를 잊지 말고 기록해보세요</p>
+
+        <form method="get" class="sort-form">
+            <label for="sort_by">정렬 기준:</label>
+            <select name="sort_by" id="sort_by" onchange="this.form.submit()">
+                <option value="created_at" {% if request.GET.sort_by == 'created_at' %}selected{% endif %}>등록순</option>
+                <option value="latest" {% if request.GET.sort_by == 'latest' %}selected{% endif %}>최신순</option>
+                <option value="interest" {% if request.GET.sort_by == 'interest' %}selected{% endif %}>찜하기순</option>
+                <option value="title" {% if request.GET.sort_by == 'title' %}selected{% endif %}>이름순</option>
+            </select>
+        </form>
+
+        <div class="item_container">
+            {% for idea in page_obj %}
+            <div class="item">
+                {% if idea.image != null and idea.image.url != "" %}
+                    <img src="{{ idea.image.url }}" alt="image">
+                {% else %}
+                    <img src="{% static 'no_img.png' %}" alt="이미지 존재X">
+                {% endif %}
+                <a href="{% url 'idea:detail' idea.pk %}" class="title">{{ idea.title }}</a>
+                <p>예상 개발 툴 : {{ idea.devtool }}</p>
+                <p>아이디어 관심도 : 
+                    <span><button class="plus_button">+</button></span>
+                    {{ idea.interest }}
+                    <span><button class="minus_button">-</button></span>
+                </p>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1&sort_by={{ request.GET.sort_by }}">&laquo; 첫 페이지</a>
+                    <a href="?page={{ page_obj.previous_page_number }}&sort_by={{ request.GET.sort_by }}">이전</a>
+                {% endif %}
+                
+                <span class="current">
+                    페이지 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                </span>
+                
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}&sort_by={{ request.GET.sort_by }}">다음</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}&sort_by={{ request.GET.sort_by }}">마지막 페이지 &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
     {% endblock %}
 </body>
 </html>
