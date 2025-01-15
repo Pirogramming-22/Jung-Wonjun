@@ -22,7 +22,11 @@
                 <img src="{% static 'no_img.png' %}" alt="이미지 존재X">
             {% endif %}
             <div class="info">
-                <h1 class="bright">{{idea.title}} ⭐</h1>
+                {% if idea.is_liked %}
+                    <h1 class="bright">{{idea.title}}⭐️</h1>
+                {% else %}
+                    <h1 class="bright">{{idea.title}}</h1>
+                {% endif %}
                 <p>1) 아이디어 관심도</p>
                 <p class="idea_info">{{idea.interest}}</p>
                 <p>2) 예상 개발 툴</p>

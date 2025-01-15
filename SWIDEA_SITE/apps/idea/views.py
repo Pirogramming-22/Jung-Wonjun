@@ -3,10 +3,20 @@ from django.core.paginator import Paginator
 from apps.idea.models import Idea
 from apps.idea.forms import Ideaform
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_protect
 import json
 
-@csrf_exempt
+def toggle_like(request, idea_id):
+    if request.method == 'POST':
+        try:
+            idea = Idea.objects.get(id=idea_id)
+            idea.is_liked = not idea.is_liked
+            idea.save()
+            return JsonResponse({'is_liked': idea.is_liked})
+        except Idea.DoesNotExist:
+            return JsonResponse({'error': 'Idea not found'}, status=404)
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
 def update_interest(request):
     if request.method == "POST":
         data = json.loads(request.body)
@@ -34,20 +44,25 @@ def update_interest(request):
 
 def list(request):
     sort_by = request.GET.get('sort_by', 'created_at')
+
     if sort_by == 'interest':
-        ideas = Idea.objects.all().order_by('-interest')  # 찜하기순
+        ideas = Idea.objects.all().order_by('-interest')  # 관심도순
+    elif sort_by == 'is_liked':  # 'is_liked'로 변경
+        ideas = Idea.objects.all().order_by('-is_liked', '-created_at')  # 찜한순
     elif sort_by == 'title':
         ideas = Idea.objects.all().order_by('title')  # 이름순
     elif sort_by == 'latest':
         ideas = Idea.objects.all().order_by('-created_at')  # 최신순
     else:
         ideas = Idea.objects.all().order_by('created_at')  # 등록순
+
     paginator = Paginator(ideas, 4)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
+
     context = {
-        'page_obj':page_obj,
-        'sort_by': sort_by
+        'page_obj': page_obj,
+        'sort_by': sort_by,
     }
     return render(request, 'idea/list.html', context)
 

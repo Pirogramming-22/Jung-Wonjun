@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Idea List</title>
     {% block head %}
         <link rel="stylesheet" href="{% static 'idea/list.css' %}">
     {% endblock %}
@@ -21,6 +21,7 @@
             <select name="sort_by" id="sort_by" onchange="this.form.submit()">
                 <option value="created_at" {% if request.GET.sort_by == 'created_at' %}selected{% endif %}>등록순</option>
                 <option value="latest" {% if request.GET.sort_by == 'latest' %}selected{% endif %}>최신순</option>
+                <option value="is_liked" {% if request.GET.sort_by == 'is_liked' %}selected{% endif %}>찜하기순</option>
                 <option value="interest" {% if request.GET.sort_by == 'interest' %}selected{% endif %}>관심도순</option>
                 <option value="title" {% if request.GET.sort_by == 'title' %}selected{% endif %}>이름순</option>
             </select>
@@ -29,11 +30,14 @@
         <div class="item_container">
             {% for idea in page_obj %}
             <div class="item">
-                {% if idea.image != null and idea.image.url != "" %}
+                {% if idea.image %}
                     <img src="{{ idea.image.url }}" alt="image">
                 {% else %}
-                    <img src="{% static 'no_img.png' %}" alt="이미지 존재X">
+                    <img src="{% static 'no_img.png' %}" alt="이미지 없음">
                 {% endif %}
+                <button class="like-btn {% if idea.is_liked %}active{% endif %}" data-idea-id="{{ idea.id }}">
+                    {% if idea.is_liked %}⭐️{% else %}☆{% endif %}
+                </button>
                 <a href="{% url 'idea:detail' idea.pk %}" class="title">{{ idea.title }}</a>
                 <p>예상 개발 툴 : {{ idea.devtool }}</p>
                 <p>아이디어 관심도:
@@ -61,25 +65,31 @@
             </span>
         </div>
     </div>
+
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-        // 증가 버튼 이벤트
-        document.querySelectorAll(".plus_button").forEach(button => {
-            button.addEventListener("click", (event) => {
-                const ideaId = event.target.dataset.id;
-                updateInterest(ideaId, "increase");
-            });
-        });
+        // 찜하기 토글
+        function toggleLike(ideaId, element) {
+            fetch(`/idea/${ideaId}/toggle_like/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.is_liked) {
+                    element.textContent = "⭐️"; // 활성화
+                    element.classList.add("active");
+                } else {
+                    element.textContent = "☆"; // 비활성화
+                    element.classList.remove("active");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
 
-        // 감소 버튼 이벤트
-        document.querySelectorAll(".minus_button").forEach(button => {
-            button.addEventListener("click", (event) => {
-                const ideaId = event.target.dataset.id;
-                updateInterest(ideaId, "decrease");
-            });
-        });
-
-        // 관심도 업데이트 함수
+        // 관심도 업데이트
         function updateInterest(ideaId, action) {
             fetch("/update-interest/", {
                 method: "POST",
@@ -101,6 +111,7 @@
             .catch(error => console.error("Error:", error));
         }
 
+        // CSRF 토큰 가져오기
         function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== "") {
@@ -114,7 +125,32 @@
                 }
             }
             return cookieValue;
-            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // 찜하기 버튼 이벤트
+            document.querySelectorAll('.like-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const ideaId = event.target.getAttribute('data-idea-id');
+                    toggleLike(ideaId, event.target);
+                });
+            });
+
+            // 관심도 증가 버튼 이벤트
+            document.querySelectorAll(".plus_button").forEach(button => {
+                button.addEventListener("click", (event) => {
+                    const ideaId = event.target.dataset.id;
+                    updateInterest(ideaId, "increase");
+                });
+            });
+
+            // 관심도 감소 버튼 이벤트
+            document.querySelectorAll(".minus_button").forEach(button => {
+                button.addEventListener("click", (event) => {
+                    const ideaId = event.target.dataset.id;
+                    updateInterest(ideaId, "decrease");
+                });
+            });
         });
     </script>
     {% endblock %}

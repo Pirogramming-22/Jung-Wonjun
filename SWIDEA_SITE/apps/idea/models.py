@@ -9,6 +9,7 @@ class Idea(models.Model):
     interest = models.IntegerField('아이디어 관심도:')
     devtool = models.ForeignKey(Tool, verbose_name='예상 개발툴:', on_delete=models.CASCADE, related_name='ideas')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="등록일")
+    is_liked = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

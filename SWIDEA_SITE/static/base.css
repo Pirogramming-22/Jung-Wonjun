@@ -44,3 +44,8 @@ a:hover {
 .bright {
     color: rgb(250, 244, 192);
 }
+
+.like-btn {
+    background: none;
+    border: none;
+}
