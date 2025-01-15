@@ -2,8 +2,36 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from apps.idea.models import Idea
 from apps.idea.forms import Ideaform
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
-# Create your views here.
+@csrf_exempt
+def update_interest(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        idea_id = data.get("id")
+        action = data.get("action")
+        try:
+            idea = Idea.objects.get(id=idea_id)
+            if action == "increase":
+                idea.interest += 1
+            elif action == "decrease" and idea.interest > 0:
+                idea.interest -= 1
+            idea.save()
+
+            return JsonResponse({
+                "success": True,
+                "new_interest": idea.interest
+            })
+        except Idea.DoesNotExist:
+            return JsonResponse({
+                "success": False,
+                "error": "Idea not found."
+            })
+    return JsonResponse({"success": False, "error": "Invalid request."})
+
+
 def list(request):
     sort_by = request.GET.get('sort_by', 'created_at')
     if sort_by == 'interest':
@@ -18,7 +46,8 @@ def list(request):
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
     context = {
-        'page_obj':page_obj
+        'page_obj':page_obj,
+        'sort_by': sort_by
     }
     return render(request, 'idea/list.html', context)
 

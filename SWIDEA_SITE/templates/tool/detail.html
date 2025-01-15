@@ -1,2 +1,45 @@
 {% extends 'base.html' %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% block head %}
+        <link rel="stylesheet" href="{% static 'tool/detail.css' %}">
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <div class="detail_container">
+        <h3 class="form_title yellow">DevTool Detail</h3>
+        <p class="discription">개발툴 세부내용 페이지 입니다. 자신이 다룰 수 있는 개발툴에 대한 상세내용을 확인해 보아요.</p>
+        <div class="content">
+            <h1 class="bright">{{tool.name}}</h1>
+            <div class="tool_info">
+                <p>{{tool.kind}}</p>
+                <p>{{tool.content}}</p>
+            </div>
+            <div class="tool_used">
+                <h4 class="bright">💻만들 수 있는 SW목록</h4>
+                {% for idea in ideas %}
+                    <a href="{% url 'idea:detail' idea.pk %}"><p>{{ idea.title }}</p></a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="button_container">
+            <a href="{% url 'tool:delete' tool.pk %}">
+                <button type="button" class="delete_button">삭제</button>
+            </a>
+            <a href="{% url 'tool:list' %}">
+                <button type="button" class="list_button">목록</button>
+            </a>
+            <a href="{% url 'tool:update' tool.pk %}">
+                <button type="button" class="update_button">수정</button>
+            </a>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

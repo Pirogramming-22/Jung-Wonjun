@@ -26,7 +26,9 @@
                 <p>1) 아이디어 관심도</p>
                 <p class="idea_info">{{idea.interest}}</p>
                 <p>2) 예상 개발 툴</p>
-                <p class=" idea_info bright">{{idea.devtool}}</p>
+                <p class=" idea_info bright">
+                    <a href="{% url 'tool:detail' idea.devtool.pk %}">{{idea.devtool}}</a>
+                </p>
                 <p>3) 아이디어 설명</p>
                 <p class="idea_info">{{idea.content}}</p>
             </div>

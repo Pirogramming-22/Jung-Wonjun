@@ -4,8 +4,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 30px;
-    padding-bottom: 100px;
-    max-width: 100%;
+    padding-bottom: 193.2px;
 }
 
 .form_title {
@@ -13,31 +12,28 @@
     margin-bottom: 0;
 }
 
-form a {
-    color: black;
-}
-
-.discription {
-    margin-top: 0;
-    color: white;
-}
-
 form {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 300px;
+    max-width: 80%;
+    margin-top: 40px;
+    position: relative;
+}
+
+form p {
     margin-left: 0;
     max-width: 100%;
+    gap: 5px;
+}
+
+p {
+    display: flex;
+    flex-direction: column;
     color: white;
-}
-
-form p:nth-of-type(1) label,
-form p:nth-of-type(3) label,
-form p:nth-of-type(4) label,
-form p:nth-of-type(5) label {
-    display: block;
-    max-width: 80%;
-}
-
-form p:nth-child(3) label:nth-child(1) {
-    display: block;
+    margin: 0 auto;
 }
 
 p input, p select {
@@ -59,7 +55,7 @@ p textarea {
     transition: background-color 0.2s ease;
     max-width: 100%;
     position: absolute;
-    top: 700px;
+    top: 320px;
     left: 50%;
     transform: translate(-50%, -50%);
 }

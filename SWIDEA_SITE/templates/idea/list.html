@@ -21,7 +21,7 @@
             <select name="sort_by" id="sort_by" onchange="this.form.submit()">
                 <option value="created_at" {% if request.GET.sort_by == 'created_at' %}selected{% endif %}>등록순</option>
                 <option value="latest" {% if request.GET.sort_by == 'latest' %}selected{% endif %}>최신순</option>
-                <option value="interest" {% if request.GET.sort_by == 'interest' %}selected{% endif %}>찜하기순</option>
+                <option value="interest" {% if request.GET.sort_by == 'interest' %}selected{% endif %}>관심도순</option>
                 <option value="title" {% if request.GET.sort_by == 'title' %}selected{% endif %}>이름순</option>
             </select>
         </form>
@@ -36,10 +36,10 @@
                 {% endif %}
                 <a href="{% url 'idea:detail' idea.pk %}" class="title">{{ idea.title }}</a>
                 <p>예상 개발 툴 : {{ idea.devtool }}</p>
-                <p>아이디어 관심도 : 
-                    <span><button class="plus_button">+</button></span>
-                    {{ idea.interest }}
-                    <span><button class="minus_button">-</button></span>
+                <p>아이디어 관심도:
+                    <span><button class="plus_button" data-id="{{ idea.id }}">+</button></span>
+                    <span id="interest_count_{{ idea.id }}">{{ idea.interest }}</span>
+                    <span><button class="minus_button" data-id="{{ idea.id }}">-</button></span>
                 </p>
             </div>
             {% endfor %}
@@ -48,21 +48,75 @@
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
-                    <a href="?page=1&sort_by={{ request.GET.sort_by }}">&laquo; 첫 페이지</a>
-                    <a href="?page={{ page_obj.previous_page_number }}&sort_by={{ request.GET.sort_by }}">이전</a>
+                <a href="?page={{ page_obj.previous_page_number }}&sort_by={{ sort_by }}">Prev</a>
                 {% endif %}
-                
+        
                 <span class="current">
-                    페이지 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
                 </span>
-                
+        
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}&sort_by={{ request.GET.sort_by }}">다음</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}&sort_by={{ request.GET.sort_by }}">마지막 페이지 &raquo;</a>
+                <a href="?page={{ page_obj.next_page_number }}&sort_by={{ sort_by }}" class="next">Next</a>
                 {% endif %}
             </span>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        // 증가 버튼 이벤트
+        document.querySelectorAll(".plus_button").forEach(button => {
+            button.addEventListener("click", (event) => {
+                const ideaId = event.target.dataset.id;
+                updateInterest(ideaId, "increase");
+            });
+        });
+
+        // 감소 버튼 이벤트
+        document.querySelectorAll(".minus_button").forEach(button => {
+            button.addEventListener("click", (event) => {
+                const ideaId = event.target.dataset.id;
+                updateInterest(ideaId, "decrease");
+            });
+        });
+
+        // 관심도 업데이트 함수
+        function updateInterest(ideaId, action) {
+            fetch("/update-interest/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                body: JSON.stringify({ id: ideaId, action: action }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const interestCount = document.getElementById(`interest_count_${ideaId}`);
+                    interestCount.textContent = data.new_interest;
+                } else {
+                    alert("Failed to update interest.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== "") {
+                const cookies = document.cookie.split("; ");
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].split("=");
+                    if (cookie[0] === name) {
+                        cookieValue = decodeURIComponent(cookie[1]);
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+            }
+        });
+    </script>
     {% endblock %}
 </body>
 </html>
