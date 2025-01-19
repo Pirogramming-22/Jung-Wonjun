@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="{% static 'highlights.css' %}" />
     <link rel="stylesheet" href="{% static 'posts.css' %}" />
     <link rel="stylesheet" href="{% static 'footer.css' %}" />
+    {% block head %}
+    
+    {% endblock %}
     <title>PiroStagram</title>
   </head>
   <body>
@@ -31,6 +34,8 @@
         </div>
       </header>
       <main>
+        {% block content %}
+        {% endblock %}
         <section class="profile">
           <div class="profile__image">
             <img src="{% static 'assets/images/profilePicture.png' %}" alt="프로필 사진" />
