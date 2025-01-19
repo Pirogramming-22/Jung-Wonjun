@@ -1,19 +1,15 @@
-{% extends 'base.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    {% block head %}
-        <link rel="stylesheet" href="{% static 'post/create.css' %}">
-    {% endblock %}
+    <title>PiroStagram</title>
+    <link rel="stylesheet" href="{% static 'create.css' %}">
 </head>
 <body>
-    {% block content %}
     <div class="create_container">
-        <h3 class="form_title yellow">게시물 등록 페이지</h3>
+        <h3 class="form_title">새 게시물</h3>
         <p class="discription">잊지못할 순간을 남겨보세요!</p>
         <form action="" method="post", enctype="multipart/form-data">
             {% csrf_token %}
@@ -21,6 +17,5 @@
             <button type="submit" class="submit_button">게시물 저장</button>
         </form>
     </div>
-    {% endblock %}
 </body>
 </html>

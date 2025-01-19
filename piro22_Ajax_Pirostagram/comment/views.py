@@ -3,6 +3,14 @@ from .models import Comment
 from post.models import Post
 from .forms import Commentform
 
+def list(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    comments = post.comments.all()
+    context = {
+        'comments': comments,
+    }
+    return render(request, 'comment/list.html', context)
+
 def create(request, post_id):
     # 요청된 게시물 가져오기
     post = get_object_or_404(Post, id=post_id)

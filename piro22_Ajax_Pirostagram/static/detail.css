@@ -1,0 +1,118 @@
+.detail_container {
+    width: 390px;
+    height: 100dvh;
+    margin: auto;
+    background-color: #000;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.post_header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 20px;
+    padding: 10px;
+    gap: 10px;
+    position: relative;
+}
+
+.header_image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #c913b9 0%, #f9373f 50%, #fecd00 100%);
+    overflow: hidden;
+    padding: 2px;
+}
+
+.post_body img {
+    width: 390px;
+    height: 40dvh;
+}
+
+.header__moreButton {
+    position: absolute;
+    right: 40px;
+    background: none;
+    cursor: pointer;
+}
+
+.post_menu {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+    padding: 8px;
+    margin-left: 30px;
+    position: relative;
+}
+
+.like_button {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+
+.like_button svg {
+    cursor: pointer;
+    transition: fill 0.3s ease;
+}
+
+.like_button svg:hover {
+    fill: red;
+}
+
+.comment_button svg {
+    cursor: pointer;
+    transition: fill 0.3s ease;
+}
+
+.comment_button svg:hover {
+    fill: gray;
+}
+
+.send_button svg {
+    cursor: pointer;
+    transition: fill 0.3s ease;
+}
+
+.send_button svg:hover {
+    fill: gray;
+}
+
+.post_content {
+    width: 80%;
+    margin-top: 10px;
+}
+
+.mark_button {
+    position: absolute;
+    right: 50px;
+}
+
+.mark_button svg {
+    cursor: pointer;
+    transition: fill 0.3s ease;
+}
+
+.mark_button svg:hover {
+    fill: gray;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+* {
+    color: white;
+}

@@ -21,7 +21,7 @@ def create(request):
         form = Postform(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('post/list.html')
+            return redirect('/')
         else:
             context = {
                 'form': form,
@@ -38,7 +38,7 @@ def create(request):
 
 def detail(request, pk):
     post = Post.objects.get(id=pk)
-    comments = Post.comments.all()
+    comments = post.comments.all()
     context = {
         'post': post,
         'comments':comments,

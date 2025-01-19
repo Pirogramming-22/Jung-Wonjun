@@ -6,7 +6,7 @@ class Post(models.Model):
     image = models.ImageField('Image:', upload_to='uploaded_images/%Y%m%d', blank=True)
     content = models.TextField('게시물 내용:')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="등록일")
-    like = models.IntegerField()
+    like = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
