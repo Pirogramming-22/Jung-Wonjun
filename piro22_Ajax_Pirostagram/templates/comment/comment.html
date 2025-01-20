@@ -8,17 +8,25 @@
     <link rel="stylesheet" href="{% static 'comment.css' %}">
 </head>
 <body>
-    <div class="list_container">
-        <div class="list_header">댓글</ㅇ>
-        {% for comment in comments %}
-            <img src="{% static 'assets/images/profilePicture.png' %}" class="profile_image" alt="Image">
-            <div class="content">
-                <p>Pirogramming</p>
-                <p>{{ comment.content }}</p>
-            </div>
-        {% empty %}
-            <p>댓글이 없습니다. 첫 번째 댓글을 작성해보세요!</p>
-        {% endfor %}
+    <div class="comment_container">
+        <div class="comment_header">
+            <a href="{% url 'post:detail' post.id %}">
+                <p>댓글</p>
+            </a>
+        </div>
+        <div class="comments">
+            {% for comment in comments %}
+                <div class="comment">
+                    <img src="{% static 'assets/images/profilePicture.png' %}" class="profile_image" alt="Image">
+                    <div class="content">
+                        <p class="user">Pirogramming</p>
+                        <p>{{ comment.content }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>댓글이 없습니다. 첫 번째 댓글을 작성해보세요!</p>
+            {% endfor %}
+        </div>
         <form action="" method="POST">
             {% csrf_token %}
             <input type="text" name="content" placeholder="댓글을 입력하세요" required>

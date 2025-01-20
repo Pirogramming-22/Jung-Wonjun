@@ -11,8 +11,10 @@
     <div class="detail_container">
         <div class="post">
             <div class="post_header">
-                <img src="{% static 'assets/images/profilePicture.png' %}" class="header_image" alt="Image">
-                <span>Pirogramming</span>
+                <a href="{% url 'post:list' %}" class="home_button">
+                    <img src="{% static 'assets/images/profilePicture.png' %}" class="header_image" alt="Image">
+                    <span>Pirogramming</span>
+                </a>
                 <div class="header__moreButton">
                     <img src="{% static 'assets/icons/more.svg' %}" alt="더보기 열기 버튼" />
                 </div>

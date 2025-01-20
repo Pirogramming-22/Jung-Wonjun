@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 .detail_container {
     width: 390px;
     height: 100dvh;
@@ -30,6 +34,12 @@
     background: linear-gradient(90deg, #c913b9 0%, #f9373f 50%, #fecd00 100%);
     overflow: hidden;
     padding: 2px;
+}
+
+.home_button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .post_body {
