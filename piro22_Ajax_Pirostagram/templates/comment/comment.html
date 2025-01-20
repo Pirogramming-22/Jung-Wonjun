@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiroStagram</title>
+    <link rel="stylesheet" href="{% static 'comment.css' %}">
+</head>
+<body>
+    <div class="list_container">
+        <div class="list_header">댓글</ㅇ>
+        {% for comment in comments %}
+            <img src="{% static 'assets/images/profilePicture.png' %}" class="profile_image" alt="Image">
+            <div class="content">
+                <p>Pirogramming</p>
+                <p>{{ comment.content }}</p>
+            </div>
+        {% empty %}
+            <p>댓글이 없습니다. 첫 번째 댓글을 작성해보세요!</p>
+        {% endfor %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="content" placeholder="댓글을 입력하세요" required>
+            <button type="submit">댓글 작성하기</button>
+        </form>
+    </div>
+</body>
+</html>
