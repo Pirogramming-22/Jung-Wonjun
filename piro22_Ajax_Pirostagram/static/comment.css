@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.comment_container {
+    width: 390px;
+    height: 100dvh; /* 화면 전체 높이를 기준으로 설정 */
+    margin: auto;
+    background-color: #000;
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    position: relative;
+    color: white;
+}
+
+.comments {
+    flex-grow: 1; /* 댓글 리스트가 가능한 공간을 채우도록 설정 */
+    overflow-y: auto; /* 댓글 리스트에 스크롤 추가 */
+    padding: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: white black;
+}
+
+.comments::-webkit-scrollbar {
+    width: 6px;
+}
+
+.comments::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 3px;
+}
+
+.comment_header {
+    text-align: center;
+    justify-items: center;
+}
+
+.comment_header p {
+    width: 50px;
+    border-top: 3px solid gray;
+    padding-top: 10px;
+    margin: 0 auto;
+}
+
+.comment {
+    width: 100%; /* 부모 컨테이너에 맞춤 */
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    padding: 5px 0;
+    gap: 10px;
+    align-items: center;
+}
+
+.profile_image {
+    width: 20px;
+    height: 20px;
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    word-break: break-word; /* 긴 텍스트 줄바꿈 */
+}
+
+.content p {
+    margin: 0;
+}
+
+form {
+    position: sticky; /* 하단 고정 */
+    bottom: 0;
+    background-color: #111;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 입력 필드와 버튼 가운데 정렬 */
+    gap: 10px; /* 입력 필드와 버튼 간격 */
+    width: 100%;
+    border-top: 1px solid white;
+    box-sizing: border-box;
+}
+
+form input {
+    width: 80%; /* 입력 필드 너비 */
+    max-width: 300px; /* 최대 너비 제한 */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: #222;
+    color: white;
+}
+
+form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #666;
+}

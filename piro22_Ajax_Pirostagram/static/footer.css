@@ -1,0 +1,22 @@
+footer {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+}
+
+.navBar {
+    color: white;
+    padding: var(--padding);
+    font-weight: bold;
+}
+
+.navBar--selected {
+    color: white;
+    opacity: 1;
+}
+
+#nav_img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid white;
+}
