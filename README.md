@@ -34,7 +34,7 @@
 ### Week 5-7
 ***팀 프로젝트 진행***
 - 주차 문제 해결을 위한 실시간 주차장 정보 제공 서비스 **'지성Park'** 기획 및 개발
-- [**[Git]지성 Park**](https://github.com/pirogramming-project/JisungPark.git)
+- [**[Git]** 지성 Park](https://github.com/pirogramming-project/JisungPark.git)
 
 ## ABOUT ME
 ### 🌱 현재 학습 중
