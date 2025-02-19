@@ -31,7 +31,11 @@
 - 카드 게임 사이트 제작
 - Pirostagram 사이트 제작
 
-### Week 5-7
+### Week 5
+***배포***
+- AWS, Gunicorn, Nginx, UnixSocket을 활용한 배포
+
+### Week 6-9
 ***팀 프로젝트 진행***
 - 주차 문제 해결을 위한 실시간 주차장 정보 제공 서비스 **'지성Park'** 기획 및 개발
 - [**[Git]** 지성 Park](https://github.com/pirogramming-project/JisungPark.git)
